@@ -11,7 +11,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import java.io.IOException;
 
 public class SamplePinger {
-    public static final String Sathish_Website= "https://sathishjayapal.me";
+    public static final String Sathish_Website= "http://google.com";
     public void checkSiteStatus(){
         HttpClient httpClient= HttpClientBuilder.create().build();
         try {
