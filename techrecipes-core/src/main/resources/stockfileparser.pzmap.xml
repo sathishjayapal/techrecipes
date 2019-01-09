@@ -1,0 +1,34 @@
+<?xml version='1.0'?>
+<!-- DTD can be pulled from the Jar or over the web-->
+<!DOCTYPE PZMAP SYSTEM    "flatpack.dtd" >
+<!--<!DOCTYPE PZMAP SYSTEM	"http://flatpack.sourceforge.net/flatpack.dtd" >-->
+
+<PZMAP>
+    <RECORD id="header" indicator="1" elementNumber="1">
+        <COLUMN name="BX Traded"/>
+        <COLUMN name="Symbol"/>
+        <COLUMN name="Security Name"/>
+        <COLUMN name="Listing Exchange"/>
+        <COLUMN name="Market Category"/>
+        <COLUMN name="ETF"/>
+        <COLUMN name="Round Lot Size"/>
+        <COLUMN name="IRSNUMBER"/>
+        <COLUMN name="Test Issue"/>
+        <COLUMN name="Financial"/>
+        <COLUMN name="CQS Symbol"/>
+        <COLUMN name="BX Symbol"/>
+        <COLUMN name="NextShares"/>
+    </RECORD>
+    <COLUMN name="BX Traded"/>
+    <COLUMN name="Symbol"/>
+    <COLUMN name="Security Name"/>
+    <COLUMN name="Listing Exchange"/>
+    <COLUMN name="Market Category"/>
+    <COLUMN name="ETF"/>
+    <COLUMN name="Round Lot Size"/>
+    <COLUMN name="Test Issue"/>
+    <COLUMN name="Financial Status"/>
+    <COLUMN name="CQS Symbol"/>
+    <COLUMN name="BX Symbol"/>
+    <COLUMN name="NextShares"/>
+</PZMAP>
