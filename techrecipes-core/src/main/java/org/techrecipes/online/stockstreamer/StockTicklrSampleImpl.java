@@ -1,15 +1,25 @@
 package org.techrecipes.online.stockstreamer;
+
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.Header;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Optional;
+
 /**
  * Created by sjayapal on 12/21/2016.
  */
@@ -18,19 +28,53 @@ public class StockTicklrSampleImpl implements StockTicklrSample {
     public Optional<StockDetailData> getPrice(String symbol) {
         URL symbolURL = null;
         Optional returnVal = Optional.empty();
+        HttpClient httpClient = HttpClientBuilder.create().build();
+
         try {
-            symbolURL = new URL("https://www.google.com/finance/info?q=NASDAQ%3a" + symbol);
-        } catch (MalformedURLException e) {
-            e.fillInStackTrace();
-            return returnVal;
+            String tickr = "https://api.robinhood.com/fundamentals/?symbols=MSFT,FB,TSLA";
+            HttpResponse httpResponse = httpClient.execute(new HttpGet(tickr));
+            HttpEntity entity = httpResponse.getEntity();
+            String returnStr = getStringFromInputStream(entity.getContent());
+            System.out.println("The return str is " + returnStr);
         } catch (IOException e) {
-            e.fillInStackTrace();
-            return returnVal;
+            e.printStackTrace();
         }
         String collectedStr = buildDataString(symbolURL);
         return parseJSONToString(collectedStr);
     }
+
+    private static String getStringFromInputStream(InputStream is) {
+
+        BufferedReader br = null;
+        StringBuilder sb = new StringBuilder();
+
+        String line;
+        try {
+
+            br = new BufferedReader(new InputStreamReader(is));
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return sb.toString();
+
+    }
+
+
     private Optional<StockDetailData> parseJSONToString(String collectedStr) {
+        System.out.println(collectedStr);
         JSONParser parser = new JSONParser();
         StockDetailData stockDetailData = new StockDetailData();
         Optional optionalData = Optional.ofNullable(stockDetailData);
@@ -55,6 +99,7 @@ public class StockTicklrSampleImpl implements StockTicklrSample {
         }
         return optionalData;
     }
+
     private String buildDataString(URL inputurl) {
         StringBuilder finalInputLine = new StringBuilder();
         String inputLine;
