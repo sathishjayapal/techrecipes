@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Tech Recipes Repo
 
 This is a repo am planning to build for the next 365 days. Inspired by this [blog](https://medium.com/@jackiehluo/a-year-of-code-c7bc1d4460cb#.27835u871). Most of the sample are from the Java 8 videos in [agile learner](https://www.agilelearner.com). It is a subscription service. But great presentations and lessons.
@@ -37,7 +36,5 @@ This is a repo am planning to build for the next 365 days. Inspired by this [blo
 | JAN 17/2018   | Compose method pattern Sample class.|
 | DEC 28/2018   | Setting up the project for 2019. New title.|
 | DEC 28/2018   | Setting up the StringObject field.|
-=======
-# techrecipes
-tech recipes reading from various blogs
->>>>>>> b59f419b255bc468f84c98f7f2bab3365b39db5c
+| JAN 10/2019   | Setting up the Jackson objects.|
+
