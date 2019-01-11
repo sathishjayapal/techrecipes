@@ -1,10 +1,12 @@
 package org.techrecipes.online.stockstreamer;
+
 import net.sf.flatpack.DataError;
 import net.sf.flatpack.DataSet;
 import net.sf.flatpack.DefaultParserFactory;
 import net.sf.flatpack.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,6 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
+
 /**
  * Created by sjayapal on 5/5/2017.
  */
@@ -27,10 +30,7 @@ public class StockFileParserImpl implements StockFileParser {
     public String stockTickrSymbolFileName;
     public LocalDate todayDate;
     Logger logger = LoggerFactory.getLogger(StockFileParserImpl.class);
-    public static void main(String args[]) {
-        StockFileParser stockDetailData = new StockFileParserImpl();
-        stockDetailData.parseStockFile("");
-    }
+
     @Override
     public void parseStockFile(String fileName) {
         Reader byteArrayReader = null;
@@ -39,12 +39,8 @@ public class StockFileParserImpl implements StockFileParser {
         Reader mappingReader = null;
         List<StockDetailData> stockDTODataList = new ArrayList();
         logger.debug("Started file parsing");
-        InputStream ios = null;
         try {
-//            FileUtils.
-            ios = new FileInputStream(new File(
-                    "C:\\Users\\JAYAPS~1\\AppData\\Local\\Temp\\stocks3275081060503613123.txt"));
-            byteArrayReader = new InputStreamReader(ios, "UTF-8");
+            InputStreamReader ios = new InputStreamReader(StockFileParserImpl.class.getResourceAsStream("/stocks3275081060503613123.txt"));
             Parser pzparser = null;
             mappingReader = new InputStreamReader(
                     StockFileParserImpl.class.getResourceAsStream("/stockfileparser.pzmap.xml"));
@@ -52,8 +48,7 @@ public class StockFileParserImpl implements StockFileParser {
                     .newDelimitedParser(mappingReader, byteArrayReader, '|', '\"', Boolean.FALSE);
             pzparser.setStoreRawDataToDataSet(true);
             pzparser.setHandlingShortLines(true);
-            final DataSet ds = pzparser.setHandlingShortLines(true).setStoreRawDataToDataSet(true)
-                    .parse();
+            final DataSet ds = pzparser.parse();
             if (ds.getErrors() != null && ds.getErrors().size() > 0) {
                 errors = ds.getErrors().iterator();
                 while (errors.hasNext()) {

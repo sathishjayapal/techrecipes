@@ -18,6 +18,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Optional;
 
 /**
@@ -26,12 +28,12 @@ import java.util.Optional;
 public class StockTicklrSampleImpl implements StockTicklrSample {
     @Override
     public Optional<StockDetailData> getPrice(String symbol) {
+        Instant start = Instant.now();
         URL symbolURL = null;
         Optional returnVal = Optional.empty();
-        HttpClient httpClient = HttpClientBuilder.create().build();
-
         try {
-            String tickr = "https://api.robinhood.com/fundamentals/?symbols=MSFT,FB,TSLA";
+            HttpClient httpClient = HttpClientBuilder.create().build();
+            String tickr = "https://api.robinhood.com/fundamentals/MSFT/";
             HttpResponse httpResponse = httpClient.execute(new HttpGet(tickr));
             HttpEntity entity = httpResponse.getEntity();
             String returnStr = getStringFromInputStream(entity.getContent());
@@ -40,7 +42,12 @@ public class StockTicklrSampleImpl implements StockTicklrSample {
             e.printStackTrace();
         }
         String collectedStr = buildDataString(symbolURL);
-        return parseJSONToString(collectedStr);
+        Optional someCrapStr = Optional.empty();
+// = parseJSONToString(collectedStr);
+        Instant finish = Instant.now();
+        long timeElapsed = Duration.between(start, finish).toMillis();
+        System.out.println("The time taken is " + timeElapsed);
+        return someCrapStr;
     }
 
     private static String getStringFromInputStream(InputStream is) {
