@@ -15,6 +15,14 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+    <repositories>
+        <repository>
+            <name>For flatpack</name>
+            <id>For Flatpack</id>
+            <url>https://repo1.maven.org/maven2/net/sf/flatpack/flatpack/4.0.4/</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
     <build>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>

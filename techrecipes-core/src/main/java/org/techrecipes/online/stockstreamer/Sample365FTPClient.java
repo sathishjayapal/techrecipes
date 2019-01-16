@@ -1,6 +1,11 @@
 package org.techrecipes.online.stockstreamer;
 
 import org.apache.commons.io.FileUtils;
+import org.joda.time.*;
+import org.joda.time.field.MillisDurationField;
+import org.joda.time.format.DateTimeFormat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,37 +19,47 @@ import java.nio.charset.Charset;
 /**
  * Created by sjayapal on 5/2/2017.
  */
-public class Sample365FTPClient {
-    static final String FTPServer = "ftp.nasdaqtrader.com";
+public class Sample365FTPClient implements StockFileParser {
     static final int BUFFER_SIZE = 4096;
-    String ftpUrl = "ftp://ftp.nasdaqtrader.com/symboldirectory/bxtraded.txt";
+    static final Logger logger = LoggerFactory.getLogger(Sample365FTPClient.class);
 
-    public static void main(String args[]) {
-        Sample365FTPClient ftpClient = new Sample365FTPClient();
-        ftpClient.downloadStockTickrFile();
-    }
-
-    public void downloadStockTickrFile() {
+    public Boolean downloadStockTickrFile() {
+        Boolean returnData = Boolean.FALSE;
+        Instant startTime = Instant.now();
         URL url = null;
         try {
-            url = new URL(ftpUrl);
-            URLConnection conn = url.openConnection();
-            InputStream inputStream = conn.getInputStream();
-            File stockFile = new File("/stocks.txt");
-            FileUtils.write(stockFile, "", Charset.defaultCharset());
-            FileOutputStream outputStream = new FileOutputStream(stockFile);
-            byte[] buffer = new byte[BUFFER_SIZE];
-            int bytesRead = -1;
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
+            defaultProperties();
+            String downloadFilePath = (String) propertiesData.get("Sample365FTPClient.pathname");
+            String pathname = downloadFilePath + "stocks" + DateTimeFormat.forPattern("MMDDYYYY").print(new DateTime()) + ".txt";
+            File stockFile = new File(pathname);
+            if (!stockFile.exists()) {
+                String ftpUrl = (String) propertiesData.get("Sample365FTPClient.ftpUrl");
+                url = new URL(ftpUrl);
+                URLConnection conn = url.openConnection();
+                InputStream inputStream = conn.getInputStream();
+                FileUtils.write(stockFile, "", Charset.defaultCharset());
+                FileOutputStream outputStream = new FileOutputStream(stockFile);
+                byte[] buffer = new byte[BUFFER_SIZE];
+                int bytesRead = -1;
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+                outputStream.close();
+                inputStream.close();
+            } else {
+                logger.error(" ***** File already downloaded for the day *****");
             }
-            outputStream.close();
-            inputStream.close();
-            System.out.println("File downloaded " + stockFile.getAbsolutePath());
+            returnData = Boolean.TRUE;
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            logger.error("FTP issue downloading file in Sample365FTPClient.class", e);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("FTP issue downloading file in Sample365FTPClient.class", e);
+        } catch (Exception e) {
+            logger.error("Un recoverable FTP error. File not downloaded", e);
         }
+        Instant endTime = Instant.now();
+        int periodTime = MillisDurationField.INSTANCE.getDifference(endTime.getMillis(), startTime.getMillis());
+        logger.debug("Time taken to FTP file to local is " + periodTime+" milli seconds");
+        return returnData;
     }
 }

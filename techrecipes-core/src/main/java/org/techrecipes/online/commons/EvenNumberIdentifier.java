@@ -13,6 +13,7 @@ public class EvenNumberIdentifier {
         return isEvenNumber;
     }
     public static Stream divisibleByTwo(int inputNumber) {
+
         return Stream.iterate(inputNumber, e -> e + 1).filter(EvenNumberIdentifier::isEven);
     }
     public static void main(String args[]) {

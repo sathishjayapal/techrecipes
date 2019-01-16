@@ -8,7 +8,7 @@ class StockFileParserImplTest {
 
     @Test
     void parseStockFile() {
-        StockFileParser stockDetailData = new StockFileParserImpl();
+        StockFileParserImpl stockDetailData = new StockFileParserImpl();
         stockDetailData.parseStockFile("");
     }
 }
