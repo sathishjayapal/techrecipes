@@ -11,6 +11,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,6 +26,7 @@ import java.util.Optional;
 /**
  * Created by sjayapal on 12/21/2016.
  */
+@Component
 public class StockTicklrSampleImpl implements StockTicklrSample {
     @Override
     public Optional<StockDetailData> getPrice(String symbol) {
@@ -33,15 +35,17 @@ public class StockTicklrSampleImpl implements StockTicklrSample {
         Optional returnVal = Optional.empty();
         try {
             HttpClient httpClient = HttpClientBuilder.create().build();
-            String tickr = "https://api.robinhood.com/fundamentals/MSFT/";
+            String tickr = "https://www.quandl.com/api/v3/datasets/WIKI/FB/data.json?api_key=JTV59x4t5CRyiAtcxzBU";
             HttpResponse httpResponse = httpClient.execute(new HttpGet(tickr));
             HttpEntity entity = httpResponse.getEntity();
             String returnStr = getStringFromInputStream(entity.getContent());
             System.out.println("The return str is " + returnStr);
+            Object collectedStr = parseJSONToString(returnStr);
+            System.out.println("The collected Str is " + collectedStr);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String collectedStr = buildDataString(symbolURL);
+
         Optional someCrapStr = Optional.empty();
 // = parseJSONToString(collectedStr);
         Instant finish = Instant.now();
@@ -108,6 +112,7 @@ public class StockTicklrSampleImpl implements StockTicklrSample {
     }
 
     private String buildDataString(URL inputurl) {
+
         StringBuilder finalInputLine = new StringBuilder();
         String inputLine;
         try {

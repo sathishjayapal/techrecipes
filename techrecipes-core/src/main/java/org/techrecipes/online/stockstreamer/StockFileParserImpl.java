@@ -11,6 +11,8 @@ import org.joda.time.field.MillisDurationField;
 import org.joda.time.format.DateTimeFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import scala.sys.Prop;
 
 import java.io.*;
@@ -22,11 +24,11 @@ import java.util.stream.StreamSupport;
 /**
  * Created by sjayapal on 5/5/2017.
  */
-public class StockFileParserImpl implements StockFileParser {
-    public String stockTickrSymbolFileName;
-    public LocalDate todayDate;
+@Component
+public class StockFileParserImpl {
     static final Logger logger = LoggerFactory.getLogger(StockFileParserImpl.class);
-
+    @Autowired
+    StockFileParser stockFileParser;
     /**
      * Stock file Name parser.
      *
@@ -41,8 +43,7 @@ public class StockFileParserImpl implements StockFileParser {
         Instant startTime = Instant.now();
         List<StockDetailData> stockDTODataList = new ArrayList();
         try {
-            defaultProperties();
-            String dailyDownloadPathName = (String) propertiesData.get("tickrfilepath.pathname");
+            String dailyDownloadPathName = (String) stockFileParser.propertiesData.get("tickrfilepath.pathname");
             String pathname = dailyDownloadPathName + "stocks" + DateTimeFormat.forPattern("MMDDYYYY").print(new DateTime()) + ".txt";
             String previousDayFilePath = dailyDownloadPathName + "stocks" + DateTimeFormat.forPattern("MMDDYYYY").print((new DateTime().minusDays(1))) + ".txt";
             if (StringUtils.isEmpty(dailyDownloadPathName)) {
@@ -57,7 +58,7 @@ public class StockFileParserImpl implements StockFileParser {
                 if (dailyDownloadFile.exists()) {
                     InputStreamReader ios = new FileReader(dailyDownloadFile);
                     Parser pzparser = null;
-                    String pzmapFile = (String) propertiesData.get("tickrfilepath.parserXMLLayout");
+                    String pzmapFile = (String) stockFileParser.propertiesData.get("tickrfilepath.parserXMLLayout");
                     mappingReader = new InputStreamReader(
                             StockFileParserImpl.class.getResourceAsStream(pzmapFile));
                     pzparser = DefaultParserFactory.getInstance()

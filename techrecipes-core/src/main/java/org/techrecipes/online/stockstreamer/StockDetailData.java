@@ -1,8 +1,14 @@
 package org.techrecipes.online.stockstreamer;
+
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
+
 /**
  * Created by sjayapal on 12/22/2016.
  */
-public class StockDetailData {
+@Component
+public class StockDetailData implements Serializable {
     /**
      * id : 304466804484872
      * t : GOOG
@@ -20,7 +26,6 @@ public class StockDetailData {
      * cp_fix : -0.55
      * ccol : chr
      * pcls_fix : 794.56
-     *
      */
     @com.google.gson.annotations.SerializedName("id")
     private String stockid;
@@ -37,51 +42,67 @@ public class StockDetailData {
     @com.google.gson.annotations.SerializedName("c")
     private String todayChange;
     private String businessName;
+
     public String getBusinessName() {
         return businessName;
     }
+
     public void setBusinessName(String businessName) {
         this.businessName = businessName;
     }
+
     public String getStockid() {
         return stockid;
     }
+
     public void setStockid(String stockid) {
         this.stockid = stockid;
     }
+
     public String getStockTickr() {
         return stockTickr;
     }
+
     public void setStockTickr(String stockTickr) {
         this.stockTickr = stockTickr;
     }
+
     public String getStockExchange() {
         return stockExchange;
     }
+
     public void setStockExchange(String stockExchange) {
         this.stockExchange = stockExchange;
     }
+
     public String getCurrentdaylow() {
         return currentdaylow;
     }
+
     public void setCurrentdaylow(String currentdaylow) {
         this.currentdaylow = currentdaylow;
     }
+
     public String getTodayFixed() {
         return todayFixed;
     }
+
     public void setTodayFixed(String todayFixed) {
         this.todayFixed = todayFixed;
     }
+
     public String getStockPriceDateTime() {
         return stockPriceDateTime;
     }
+
     public void setStockPriceDateTime(String stockPriceDateTime) {
         this.stockPriceDateTime = stockPriceDateTime;
     }
+
     public String getTodayChange() {
         return todayChange;
     }
+
     public void setTodayChange(String todayChange) {
         this.todayChange = todayChange;
     }

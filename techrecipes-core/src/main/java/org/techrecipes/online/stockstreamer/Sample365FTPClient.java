@@ -6,6 +6,8 @@ import org.joda.time.field.MillisDurationField;
 import org.joda.time.format.DateTimeFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -19,21 +21,22 @@ import java.nio.charset.Charset;
 /**
  * Created by sjayapal on 5/2/2017.
  */
-public class Sample365FTPClient implements StockFileParser {
+@Component
+public class Sample365FTPClient  {
     static final int BUFFER_SIZE = 4096;
     static final Logger logger = LoggerFactory.getLogger(Sample365FTPClient.class);
-
+    @Autowired
+    StockFileParser stockFileParser;
     public Boolean downloadStockTickrFile() {
         Boolean returnData = Boolean.FALSE;
         Instant startTime = Instant.now();
         URL url = null;
         try {
-            defaultProperties();
-            String downloadFilePath = (String) propertiesData.get("Sample365FTPClient.pathname");
-            String pathname = downloadFilePath + "stocks" + DateTimeFormat.forPattern("MMDDYYYY").print(new DateTime()) + ".txt";
+            String pathname = stockFileParser.getTickrDailyFile();
             File stockFile = new File(pathname);
             if (!stockFile.exists()) {
-                String ftpUrl = (String) propertiesData.get("Sample365FTPClient.ftpUrl");
+                String ftpUrl =
+                        (String) stockFileParser.propertiesData.get("Sample365FTPClient.ftpUrl");
                 url = new URL(ftpUrl);
                 URLConnection conn = url.openConnection();
                 InputStream inputStream = conn.getInputStream();
@@ -59,7 +62,7 @@ public class Sample365FTPClient implements StockFileParser {
         }
         Instant endTime = Instant.now();
         int periodTime = MillisDurationField.INSTANCE.getDifference(endTime.getMillis(), startTime.getMillis());
-        logger.debug("Time taken to FTP file to local is " + periodTime+" milli seconds");
+        logger.debug("Time taken to FTP file to local is " + periodTime + " milli seconds");
         return returnData;
     }
 }

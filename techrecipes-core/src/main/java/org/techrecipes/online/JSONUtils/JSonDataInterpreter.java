@@ -10,7 +10,7 @@ public class JSonDataInterpreter {
     Logger LOG = LoggerFactory.getLogger(JSonDataInterpreter.class);
 
     public void serializerFor() {
-        String json = "{\"name\":\"Frank\",\"id\":5000}";
+        String json = "{\"empName\":\"Frank\",\"id\":5000}";
         Employee nameOfEmployee = null;
         try {
             nameOfEmployee = new ObjectMapper().readValue(json, Employee.class);

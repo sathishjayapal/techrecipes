@@ -1,10 +1,13 @@
 package org.techrecipes.online.stockstreamer;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 /**
  * Created by sjayapal on 5/11/2017.
  */
+@Component
 public class StockStreamSplitIterator implements Spliterator<StockDetailData> {
     private final List<StockDetailData> stockTickrList;
     private int currentTickr = 0;
