@@ -3,7 +3,6 @@ package org.techrecipes.online.stockstreamer;
 import org.apache.commons.io.FileUtils;
 import org.joda.time.*;
 import org.joda.time.field.MillisDurationField;
-import org.joda.time.format.DateTimeFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

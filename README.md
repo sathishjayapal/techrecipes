@@ -37,4 +37,5 @@ This is a repo am planning to build for the next 365 days. Inspired by this [blo
 | DEC 28/2018   | Setting up the project for 2019. New title.|
 | DEC 28/2018   | Setting up the StringObject field.|
 | JAN 10/2019   | Setting up the Jackson objects.|
+| JAN 23/2019   | Corrections and usage of HttpClient API|
 

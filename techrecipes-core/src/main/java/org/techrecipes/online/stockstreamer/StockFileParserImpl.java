@@ -13,10 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import scala.sys.Prop;
 
 import java.io.*;
-import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -29,27 +27,27 @@ public class StockFileParserImpl {
     static final Logger logger = LoggerFactory.getLogger(StockFileParserImpl.class);
     @Autowired
     StockFileParser stockFileParser;
+
     /**
      * Stock file Name parser.
      *
-     * @param fileName
      */
-    public int parseStockFile(String fileName) {
+    public List<StockDetailData> parseStockFile() {
         logger.debug("Started file parsing");
         int returnData = -1;
         Iterator errors;
         DataError dataError;
         Reader mappingReader = null;
         Instant startTime = Instant.now();
-        List<StockDetailData> stockDTODataList = new ArrayList();
+        List<StockDetailData> stockDTODataList = Collections.EMPTY_LIST;
         try {
-            String dailyDownloadPathName = (String) stockFileParser.propertiesData.get("tickrfilepath.pathname");
-            String pathname = dailyDownloadPathName + "stocks" + DateTimeFormat.forPattern("MMDDYYYY").print(new DateTime()) + ".txt";
+            String dailyDownloadPathName = stockFileParser.getTickrDailyFile();
             String previousDayFilePath = dailyDownloadPathName + "stocks" + DateTimeFormat.forPattern("MMDDYYYY").print((new DateTime().minusDays(1))) + ".txt";
             if (StringUtils.isEmpty(dailyDownloadPathName)) {
                 logger.error("Cannot load properties file. Unknown location to parse file");
             } else {
-                File dailyDownloadFile = new File(pathname);
+                File dailyDownloadFile = new File(dailyDownloadPathName);
+
                 if (!dailyDownloadFile.exists())
                     dailyDownloadFile = new File(previousDayFilePath);
                 else{
@@ -84,6 +82,7 @@ public class StockFileParserImpl {
                     if (first.isPresent()) {
                         throw new Exception("Invalid entries in file.");
                     }
+                    stockDTODataList= new ArrayList<>();
                     while (ds.next()) {
                         if (ds.getRowNo() == 1) {
                             logger.debug(">>>>found header");
@@ -125,6 +124,6 @@ public class StockFileParserImpl {
         Instant endTime = Instant.now();
         int periodTime = MillisDurationField.INSTANCE.getDifference(endTime.getMillis(), startTime.getMillis());
         logger.debug("Time taken to parse file to object is " + periodTime + " milli seconds");
-        return returnData;
+        return stockDTODataList;
     }
 }
