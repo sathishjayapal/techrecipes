@@ -19,6 +19,7 @@ import java.nio.charset.Charset;
 
 /**
  * Created by sjayapal on 5/2/2017.
+ *
  */
 @Component
 public class Sample365FTPClient  {
@@ -38,6 +39,7 @@ public class Sample365FTPClient  {
                         (String) stockFileParser.propertiesData.get("Sample365FTPClient.ftpUrl");
                 url = new URL(ftpUrl);
                 URLConnection conn = url.openConnection();
+                conn.setConnectTimeout(10000);
                 InputStream inputStream = conn.getInputStream();
                 FileUtils.write(stockFile, "", Charset.defaultCharset());
                 FileOutputStream outputStream = new FileOutputStream(stockFile);
