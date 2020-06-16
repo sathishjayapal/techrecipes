@@ -28,7 +28,7 @@
         <lamma.version>2.2.2</lamma.version>
         <lombok.version>1.18.4</lombok.version>
         <javafaker.version>0.12</javafaker.version>
-        <jackson.version>2.9.7</jackson.version>
+        <jackson.version>2.10.0</jackson.version>
         <junit.version>4.12</junit.version>
         <junit-jupiter.version>5.2.0</junit-jupiter.version>
         <json-simple.version>1.1</json-simple.version>
@@ -183,7 +183,7 @@
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
-            <version>6.4.3</version>
+            <version>6.11.0</version>
             <exclusions>
                 <exclusion>
                     <artifactId>commons-collections</artifactId>
