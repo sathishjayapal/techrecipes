@@ -29,7 +29,7 @@
         <lombok.version>1.18.4</lombok.version>
         <javafaker.version>0.12</javafaker.version>
         <jackson.version>2.9.7</jackson.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <junit-jupiter.version>5.2.0</junit-jupiter.version>
         <json-simple.version>1.1</json-simple.version>
         <joda.version>2.9.2</joda.version>
