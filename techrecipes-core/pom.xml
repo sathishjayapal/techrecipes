@@ -24,7 +24,7 @@
         <guava.version>18.0</guava.version>
         <h2.version>1.4.180</h2.version>
         <hibernate.version>4.3.11.Final</hibernate.version>
-        <httpclient.version>4.5.6</httpclient.version>
+        <httpclient.version>4.5.13</httpclient.version>
         <lamma.version>2.2.2</lamma.version>
         <lombok.version>1.18.4</lombok.version>
         <javafaker.version>0.12</javafaker.version>
