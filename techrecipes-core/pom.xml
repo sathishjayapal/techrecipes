@@ -40,7 +40,7 @@
         <spring-orm.version>5.0.8.RELEASE</spring-orm.version>
         <sl4j.version>1.7.7</sl4j.version>
         <tomcat.version>7.0.55</tomcat.version>
-        <springboot.version>2.1.0.RELEASE</springboot.version>
+        <springboot.version>2.3.0.RELEASE</springboot.version>
 
         <!--Compiler params-->
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -237,18 +237,18 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>5.0.11.RELEASE</version>
+            <version>5.2.18.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <version>5.0.11.RELEASE</version>
+            <version>5.2.18.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>5.0.11.RELEASE</version>
+            <version>5.2.18.RELEASE</version>
         </dependency>
 
     </dependencies>
