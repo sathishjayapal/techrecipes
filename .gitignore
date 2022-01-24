@@ -1,2 +1,5 @@
 *.idea
 .target
+/techrecipes-webapp/target/
+/techrecipes-core/target/
+/techrecipes-core/F:/MySyncs/Dropbox/Shared workspace/Projects Team Folder/techrecipes/stocks102772021.txt
