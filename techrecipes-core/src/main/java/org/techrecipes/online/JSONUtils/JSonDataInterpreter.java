@@ -14,7 +14,7 @@ public class JSonDataInterpreter {
         Employee nameOfEmployee = null;
         try {
             nameOfEmployee = new ObjectMapper().readValue(json, Employee.class);
-            System.out.println("The name of Employee\t" + nameOfEmployee.toString());
+            System.out.println("The name of Employee\t" + nameOfEmployee.getEmpName());
         } catch (IOException e) {
             LOG.error("JSON Object mapping exception", e);
         }

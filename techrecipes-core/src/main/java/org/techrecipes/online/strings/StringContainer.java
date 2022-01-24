@@ -15,7 +15,7 @@ public class StringContainer {
     public static void main(String args[]) {
         System.out.println("Manipulation starting");
         String stringWithPrefix = "stringWithPrefix";
-        for (int i = 0; i < 2000000; i++) {
+        for (int i = 0; i < 20000; i++) {
             Faker startFaker= new Faker();
             Name fakeName= startFaker.name();
             IdNumber idNumber= startFaker.idNumber();
@@ -24,7 +24,7 @@ public class StringContainer {
         }
         System.out.println("Map size: " + fakeObjectContainer.size());
         System.gc();
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 10000; i++) {
             String newString = stringWithPrefix + i;
             fakeObjectContainer.remove(idList.get(i));
         }

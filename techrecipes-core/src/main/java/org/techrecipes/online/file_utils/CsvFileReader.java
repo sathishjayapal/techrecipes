@@ -59,9 +59,4 @@ public class CsvFileReader {
         }
         System.out.println(listData.size());
     }
-
-    public static void main(String args[]) {
-        CsvFileReader csvFileReader = new CsvFileReader();
-        csvFileReader.readCSVFile("C:\\Users\\jayapskewf\\SELECT_I_PRV3_HEALTHCARE_PROVIDER_ID__P_.csv");
-    }
 }

@@ -5,7 +5,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
-import javax.jws.WebService;
+//import javax.jws.WebService;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Created by sjayapal on 10/9/2017.
  */
-@WebService(serviceName = "reportsGenerationService")
+//@WebService(serviceName = "reportsGenerationService")
 public class ReportsGenerationService {
     public void reportsGenerationWithParams() {
         JasperPrint jasperPrint = null;

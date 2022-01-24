@@ -12,7 +12,7 @@ class StockTicklrSampleImplTest {
     @Test
     void getPrice() {
         StockTicklrSample stockTicklrSample = new StockTicklrSampleImpl();
-        Optional<StockDetailData> tickr = stockTicklrSample.getPrice("AAPL");
+        Optional<StockDetailData> tickr = stockTicklrSample.getPrice("FB");
         Assert.assertTrue(tickr.isPresent());
     }
 }

@@ -34,7 +34,7 @@ public class ExecutorServiceFutureSample {
   private Integer futureAPIUsageSample2()
       throws InterruptedException, ExecutionException, IOException {
     ExecutorService executorService = Executors.newFixedThreadPool(100);
-    Files.list(Paths.get("/volumes/Segate HDD/iTunes Media/"))
+    Files.list(Paths.get("/Users/shared/"))
         .forEach(str -> executorService.submit(() -> {
             try {
               System.out.println(

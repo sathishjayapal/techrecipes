@@ -31,11 +31,9 @@ public class StockTicklrSampleImpl implements StockTicklrSample {
     @Override
     public Optional<StockDetailData> getPrice(String symbol) {
         Instant start = Instant.now();
-        URL symbolURL = null;
-        Optional returnVal = Optional.empty();
         try {
             HttpClient httpClient = HttpClientBuilder.create().build();
-            String tickr = "https://www.quandl.com/api/v3/datasets/WIKI/FB/data.json?api_key=JTV59x4t5CRyiAtcxzBU";
+            String tickr = "https://www.quandl.com/api/v3/datasets/WIKI/"+symbol+"/data.json?api_key=JTV59x4t5CRyiAtcxzBU";
             HttpResponse httpResponse = httpClient.execute(new HttpGet(tickr));
             HttpEntity entity = httpResponse.getEntity();
             String returnStr = getStringFromInputStream(entity.getContent());
@@ -47,7 +45,6 @@ public class StockTicklrSampleImpl implements StockTicklrSample {
         }
 
         Optional someCrapStr = Optional.empty();
-// = parseJSONToString(collectedStr);
         Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).toMillis();
         System.out.println("The time taken is " + timeElapsed);
@@ -90,7 +87,7 @@ public class StockTicklrSampleImpl implements StockTicklrSample {
         StockDetailData stockDetailData = new StockDetailData();
         Optional optionalData = Optional.ofNullable(stockDetailData);
         try {
-            JSONObject jsonObject = (JSONObject) parser.parse(collectedStr.toString());
+            JSONObject jsonObject = (JSONObject) parser.parse(collectedStr);
             stockDetailData.setStockid("id");
             stockDetailData
                     .setStockTickr((String) ObjectUtils.defaultIfNull(jsonObject.get("t"), "NA"));

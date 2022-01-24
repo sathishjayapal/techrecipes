@@ -4,10 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.techrecipes.online.stockstreamer.StockFileParser;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Properties;
 
 public class FileContentsDelete {
@@ -16,10 +13,14 @@ public class FileContentsDelete {
 
     public void deletFileWithPrintWriter(String printWriterFileName) {
         try {
-            PrintWriter printWriter = new PrintWriter(printWriterFileName);
-            printWriter.println();
-            printWriter.print("");
-            printWriter.close();
+            File fileForWriter = new File(printWriterFileName);
+            System.out.println("fileForWriter.isFile() && fileForWriter.canWrite()" + (fileForWriter.isFile() && fileForWriter.canWrite()));
+            if (fileForWriter.isFile() && fileForWriter.canWrite()) {
+                PrintWriter printWriter = new PrintWriter(printWriterFileName);
+                printWriter.println();
+                printWriter.print("");
+                printWriter.close();
+            }
         } catch (IOException e) {
             logger.error("FileContentsDelete  data delete", e);
         }
