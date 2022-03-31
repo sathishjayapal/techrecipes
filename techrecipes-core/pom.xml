@@ -228,18 +228,18 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>5.0.11.RELEASE</version>
+            <version>5.3.18</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <version>5.0.11.RELEASE</version>
+            <version>5.3.18</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>5.0.11.RELEASE</version>
+            <version>5.3.18</version>
         </dependency>
 
     </dependencies>
