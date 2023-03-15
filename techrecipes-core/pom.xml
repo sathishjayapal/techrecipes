@@ -179,7 +179,7 @@
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
-            <version>6.4.3</version>
+            <version>6.20.1</version>
             <exclusions>
                 <exclusion>
                     <artifactId>commons-collections</artifactId>
