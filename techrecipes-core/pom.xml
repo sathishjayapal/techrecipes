@@ -40,7 +40,7 @@
         <spring-orm.version>5.0.8.RELEASE</spring-orm.version>
         <sl4j.version>1.7.7</sl4j.version>
         <tomcat.version>7.0.55</tomcat.version>
-        <springboot.version>2.5.0</springboot.version>
+        <springboot.version>3.0.11</springboot.version>
 
         <!--Compiler params-->
         <maven.compiler.source>16</maven.compiler.source>
